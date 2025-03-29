@@ -17,3 +17,32 @@ jobs:
     - uses: coursier/cache-action@v6.4
     - uses: VirtusLab/scala-cli-setup@v1.5
     - run: scala-cli --power package . --js -o ./assets/main.js --js-mode full --js-module-split-style fewestmodules
+    - name: Setup Pages
+      uses: actions/configure-pages@main
+    - uses: actions/upload-artifact@main
+      with:
+        name: page
+        path: assets
+        if-no-files-found: error
+
+  deploy:
+    needs: build
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/download-artifact@main
+      with:
+        name: page
+        path: .
+    - uses: actions/configure-pages@main
+    - uses: actions/upload-pages-artifact@main
+      with:
+        path: .
+    - name: Deploy to GitHub Pages
+      id: deployment
+      uses: actions/deploy-pages@main
