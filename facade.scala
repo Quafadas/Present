@@ -6,10 +6,25 @@ import org.scalajs.dom.Element
 import org.scalajs.dom.HTMLDivElement
 
 @js.native
-@JSGlobal("Reveal")
-class Reveal(options: js.Dynamic) extends js.Object {
+@JSImport(
+  "https://cdn.jsdelivr.net/npm/reveal.js/dist/reveal.esm.js",
+  JSImport.Default
+)
+object Reveal extends js.Object {
+  def initialize(
+      options: js.Dynamic,
+      highlight: js.UndefOr[js.Dynamic] = js.undefined
+  ): Unit = js.native
   def initialize(): Unit = js.native
+  def hasPlugin(name: String): Boolean = js.native
 }
+
+@js.native
+@JSImport(
+  "https://cdn.jsdelivr.net/npm/reveal.js/plugin/highlight/highlight.esm.js",
+  JSImport.Default
+)
+object Highlight extends js.Object
 
 @js.native
 @JSImport(
