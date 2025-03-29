@@ -1,4 +1,4 @@
-package webapp
+package presentation
 
 import scala.scalajs.js
 import scala.scalajs.js.annotation._
@@ -17,6 +17,7 @@ object Reveal extends js.Object {
   ): Unit = js.native
   def initialize(): Unit = js.native
   def hasPlugin(name: String): Boolean = js.native
+  def getPlugin(name: String): js.Dynamic = js.native
 }
 
 @js.native
@@ -45,7 +46,22 @@ trait EChartInstance extends js.Object:
   "https://cdn.jsdelivr.net/npm/highlightjs@9.16.2/+esm",
   JSImport.Namespace
 )
-object highlightjs extends js.Object:
+object Highlightjs extends Highlightjs
+
+@js.native
+@JSGlobal
+object hljs extends Highlightjs
+
+@js.native
+@JSImport(
+  "https://unpkg.com/@highlightjs/cdn-assets@11.11.1/es/languages/scala.min.js",
+  JSImport.Default
+)
+object hljsGrammar extends js.Object
+
+@js.native
+trait Highlightjs extends js.Object:
   def highlightElement(element: Element): Unit = js.native
   def configure(options: js.Dynamic): Unit = js.native
   def highlightAll(): Unit = js.native
+  def registerLanguage(name: String, language: js.Object): Unit = js.native

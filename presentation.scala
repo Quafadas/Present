@@ -1,4 +1,4 @@
-package webapp
+package presentation
 
 import org.scalajs.dom
 import scalatags.Text.all._
@@ -38,13 +38,11 @@ import scala.scalajs.js.annotation.JSImport.Namespace
 
       val container = dom.document.getElementById("slides")
       container.innerHTML = generatePres.render
-      // viz.js.showChartJs(chart, dom.document.getElementById("chart"))
       val c1 = dom.document.getElementById("chart").asInstanceOf[HTMLDivElement]
 
-      // deck.initialize()
-
       println(Reveal.hasPlugin("highlight"))
-
+      hljs.registerLanguage("scala", hljsGrammar)
+      hljs.highlightAll()
       makeEchart("bar.echart.json", c1, 50)
     }
   }
@@ -65,9 +63,10 @@ def generatePres =
           marginTop := "30vh"
         ),
         p(),
-        p("Write a presentation in scala"),
+        p("Goal: write a presentation in scala"),
+        p("Check links"),
         a(href := "#2", "Slide 3"),
-        p("Set the URL to #2 to live reload that slide")
+        p("Also set the URL to #2 to live reload that slide on change")
       ),
       section(
         h3("Vertical Slide"),
@@ -78,20 +77,21 @@ def generatePres =
       div(
         3 * 2
       ),
-      "We calculed 3 * 2 - amazing"
+      "We calculated 3 * 2 - amazing"
     ),
     section(
       h3("A cat picture"),
       img(
         src := "Cat.jpg",
         alt := "A cat",
-        height := "25vh" // Set a maximum width for the image
+        height := "50vh"
       )
     ),
     section(
       chartDiv
     ),
     section(
+      h2("Check math ML"),
       p(
         math(
           raw(
@@ -108,14 +108,25 @@ def generatePres =
     section(
       h3("Some code"),
       p("Simple code"),
-      pre(
-        code(
-          `class` := "language-html",
-          "<h1> Hello, world!</h1>"
+      div(
+        pre(
+          code(
+            `class` := "language-html",
+            raw"<h1> Hello, world!</h1>"
+          ),
+          code(
+            raw"<h1> Hello, world!</h1>"
+          )
         ),
-        code(
-          `class` := "language-html",
-          "<h1> Hello, world!</h1>"
+        pre(
+          code(
+            `class` := "language-scala",
+            // I think this doesn't work, because i'm using highlight directly
+            attr("data-line-numbers") := "2",
+            raw"""val x = 1
+val y = 2
+val z = x + y"""
+          )
         )
       )
     )
