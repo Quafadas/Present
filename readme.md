@@ -1,5 +1,7 @@
 ## A presentation written in Scala JS
 
+locally;
+
 ```shell
 just present
 ```
@@ -8,6 +10,7 @@ Or, if you don't use just;
 ```shell
 coursier launch io.github.quafadas::sjsls:0.2.5 -- --path-to-index-html {{invocation_directory()}}/assets
 ```
+Push to main will publish to github pages.
 
 ## Notes
 
@@ -24,4 +27,13 @@ All dependancies are ESModules loaded out of JSDelivr. No toolchain :-), very qu
 
 Can be changed in `index.html`
 
-###
+### Checks
+
+- [x] Slides
+- [x] Vertical Slides
+- [x] Pictures
+- [x] Result of Code execution
+- [x] Syntax Highlighting
+- [x] Math
+- [x] Links
+- [x] Plotting
