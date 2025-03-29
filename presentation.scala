@@ -14,7 +14,6 @@ import scala.util.Random
 import org.scalajs.dom.XMLHttpRequest
 import scala.scalajs.js.JSON
 import scala.scalajs.js.annotation.JSImport.Namespace
-// import webapp.hljs.highlightAll
 
 @main def main: Unit = dom.document.addEventListener(
   "DOMContentLoaded",
@@ -29,32 +28,30 @@ import scala.scalajs.js.annotation.JSImport.Namespace
         hash = true,
         disableLayout = true
       )
-      val deck = Reveal.initialize(
-        options
-        // js.Dynamic.literal(
-        //   beforeHighlight = (hljs: js.Dynamic) => hljs.registerLanguage("scala")
-        // )
-      )
+      Reveal.initialize(options)
 
       val container = dom.document.getElementById("slides")
       container.innerHTML = generatePres.render
-      val c1 = dom.document.getElementById("chart").asInstanceOf[HTMLDivElement]
 
-      println(Reveal.hasPlugin("highlight"))
+      /** Render charts into the div with id chart */
+      val c1 = dom.document.getElementById("chart").asInstanceOf[HTMLDivElement]
+      makeEchart("bar.echart.json", c1, 50)
+
+      /** Highlight.js
+        */
       hljs.registerLanguage("scala", hljsGrammar)
       hljs.highlightAll()
-      makeEchart("bar.echart.json", c1, 50)
     }
   }
 )
 
-def generatePres =
-  val chartDiv = div(
-    id := "chart",
-    width := "100vw",
-    height := "100vh"
-  )
+val chartDiv = div(
+  id := "chart",
+  width := "100vw",
+  height := "100vh"
+)
 
+def generatePres =
   frag(
     section(
       section(
@@ -63,7 +60,7 @@ def generatePres =
           marginTop := "30vh"
         ),
         p(),
-        p("Goal: write a presentation in scala"),
+        p("Goal: write a presentation in scala.js"),
         p("Check links"),
         a(href := "#2", "Slide 3"),
         p("Note: Set the URL to (e.g.) #2 to live reload that slide on change")
