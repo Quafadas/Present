@@ -18,4 +18,10 @@ Change the `Present` part, to follow the name of your github page if you fork / 
 
 
 ### ESM
-ALl typescreipt modules are ESModules loaded out of JSDelivr. No toolchain :-), very quick to get started.
+All dependancies are ESModules loaded out of JSDelivr. No toolchain :-), very quick to get started.
+
+### Themes
+
+Can be changed in `index.html`
+
+###

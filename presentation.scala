@@ -66,7 +66,7 @@ def generatePres =
         p("Goal: write a presentation in scala"),
         p("Check links"),
         a(href := "#2", "Slide 3"),
-        p("Also set the URL to #2 to live reload that slide on change")
+        p("Note: Set the URL to (e.g.) #2 to live reload that slide on change")
       ),
       section(
         h3("Vertical Slide"),
@@ -112,10 +112,7 @@ def generatePres =
         pre(
           code(
             `class` := "language-html",
-            raw"<h1> Hello, world!</h1>"
-          ),
-          code(
-            raw"<h1> Hello, world!</h1>"
+            "<h1> Hello, world!</h1>"
           )
         ),
         pre(
@@ -125,7 +122,7 @@ def generatePres =
             attr("data-line-numbers") := "2",
             raw"""val x = 1
 val y = 2
-val z = x + y"""
+def add(a: Int, b: Int): Int = a + b"""
           )
         )
       )
